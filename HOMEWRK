@@ -1,0 +1,37 @@
+import numpy as np
+
+def find_min_element(vector):
+
+    return np.min(vector)
+
+def find_nonzero_product(vector):
+
+    nonzero_elements = vector[vector != 0]
+
+    if len(nonzero_elements) == 0:
+
+        return 0
+
+    return np.prod(nonzero_elements)
+
+def extract_vector(matrix, row_index):
+
+    return matrix[row_index, :]
+
+A = np.loadtxt('matrix_file.txt')  
+
+k = int(input("Enter the row index (k): "))
+
+kth_row = extract_vector(A, k)
+
+min_element = find_min_element(kth_row)
+
+min_element_col = np.where(kth_row == min_element)[0][0]
+
+min_element_col_vector = extract_vector(A, :, min_element_col)
+
+nonzero_product = find_nonzero_product(min_element_col_vector)
+
+print("Минимальное число в строке k:", min_element)
+
+print("Произведение ненулевых элементов в столбце минимального элемента:", nonzero_product)
